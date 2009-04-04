@@ -1,0 +1,13 @@
+Html5 on Rails
+=====
+
+This plugin is a bit of a playground to see what html goodies we can do. I'm implementing things as I desire them, and not in any normal order.
+
+Current Features
+=======
+
+Since the type attributes for CSS and javascript tags have sensible defaults, we can omit them unless we need to override them.
+<script src="/javascripts/all.js"></script>
+<link href="/stylesheets/boilerplate.css?1238073247" media="all" rel="stylesheet" />
+
+Copyright (c) 2009 Collective Idea, released under the MIT license
