@@ -1,2 +1,2 @@
-# Include hook code here
+::SKIP_SELF_CLOSE_TAGS = true
 require 'html5'
