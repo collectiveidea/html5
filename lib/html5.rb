@@ -32,4 +32,68 @@ module ActionView::Helpers::TagHelper
   alias_method_chain :tag, :skip_self_closing
 end
 
+require 'action_view/helpers/form_helper'
 
+module ActionView::Helpers
+  module FormHelper
+    def email_field(object_name, method, options = {})
+      InstanceTag.new(object_name, method, self, options.delete(:object)).to_input_field_tag("email", options)
+    end
+  
+    def url_field(object_name, method, options = {})
+      InstanceTag.new(object_name, method, self, options.delete(:object)).to_input_field_tag("url", options)
+    end
+  
+    def search_field(object_name, method, options = {})
+      InstanceTag.new(object_name, method, self, options.delete(:object)).to_input_field_tag("search", options)
+    end
+  
+    def number_field(object_name, method, options = {})
+      InstanceTag.new(object_name, method, self, options.delete(:object)).to_input_field_tag("number", options)
+    end
+  
+    def range_field(object_name, method, options = {})
+      InstanceTag.new(object_name, method, self, options.delete(:object)).to_input_field_tag("range", options)
+    end
+  end
+
+  class FormBuilder
+    self.field_helpers = (FormHelper.instance_methods - ['form_for'])
+    
+    (field_helpers - %w(label check_box radio_button fields_for hidden_field)).each do |selector|
+      src = <<-end_src
+        def #{selector}(method, options = {})  # def text_field(method, options = {})
+          @template.send(                      #   @template.send(
+            #{selector.inspect},               #     "text_field",
+            @object_name,                      #     @object_name,
+            method,                            #     method,
+            objectify_options(options))        #     objectify_options(options))
+        end                                    # end
+      end_src
+      class_eval src, __FILE__, __LINE__
+    end
+  end
+end
+
+
+module ActionView::Helpers::FormTagHelper
+  def email_field_tag(name, value = nil, options = {})
+    text_field_tag(name, value, options.stringify_keys.update("type" => "email"))
+  end
+
+  def url_field_tag(name, value = nil, options = {})
+    text_field_tag(name, value, options.stringify_keys.update("type" => "url"))
+  end
+
+  def search_field_tag(name, value = nil, options = {})
+    text_field_tag(name, value, options.stringify_keys.update("type" => "search"))
+  end
+  
+  def number_field_tag(name, value = nil, options = {})
+    text_field_tag(name, value, options.stringify_keys.update("type" => "number"))
+  end
+  
+  def range_field_tag(name, value = nil, options = {})
+    text_field_tag(name, value, options.stringify_keys.update("type" => "range"))
+  end
+end

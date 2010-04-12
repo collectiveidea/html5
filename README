@@ -1,4 +1,4 @@
-Html5 on Rails
+HTML5 on Rails
 =====
 
 by Daniel Morrison, Collective Idea
@@ -8,10 +8,22 @@ This plugin is a bit of a playground to see what html goodies we can do. I'm imp
 Current Features
 =======
 
+New form field helpers for new field types (all work as text fields in browsers that don't support them): 
+  email_field
+  url_field
+  search_field
+  number_field
+  range_field
+
 Since the type attributes for CSS and javascript tags have sensible defaults, we can omit them unless we need to override them.
 <script src="/javascripts/all.js"></script>
 <link href="/stylesheets/main.css" media="all" rel="stylesheet">
 
 Don't self-close tags. This allows us to have <img src="foo.png"> instead of <img src="foo.png" />. Of course you'll need that if you're serving your pages as application/xhtml+xml, but if you know what that means, you'll probably know how to override it.
 
-Copyright (c) 2009 Collective Idea, released under the MIT license
+Rails Version
+=======
+
+This is currently built for Rails 2.x. I'll update it for 3.0 when I have time, but patches are always welcome!
+
+Copyright (c) 2009-2010 Collective Idea, released under the MIT license
