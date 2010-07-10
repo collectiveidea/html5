@@ -55,6 +55,10 @@ module ActionView::Helpers
     def range_field(object_name, method, options = {})
       InstanceTag.new(object_name, method, self, options.delete(:object)).to_input_field_tag("range", options)
     end
+
+    def tel_field(object_name, method, options = {})
+      InstanceTag.new(object_name, method, self, options.delete(:object)).to_input_field_tag("tel", options)
+    end
   end
 
   class FormBuilder
@@ -95,5 +99,9 @@ module ActionView::Helpers::FormTagHelper
   
   def range_field_tag(name, value = nil, options = {})
     text_field_tag(name, value, options.stringify_keys.update("type" => "range"))
+  end
+
+  def range_field_tag(name, value = nil, options = {})
+    text_field_tag(name, value, options.stringify_keys.update("type" => "tel"))
   end
 end
