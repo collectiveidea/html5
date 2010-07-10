@@ -101,7 +101,7 @@ module ActionView::Helpers::FormTagHelper
     text_field_tag(name, value, options.stringify_keys.update("type" => "range"))
   end
 
-  def range_field_tag(name, value = nil, options = {})
+  def tel_field_tag(name, value = nil, options = {})
     text_field_tag(name, value, options.stringify_keys.update("type" => "tel"))
   end
 end
