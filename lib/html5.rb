@@ -62,7 +62,7 @@ module ActionView::Helpers
   end
 
   class FormBuilder
-    self.field_helpers = (FormHelper.instance_methods - ['form_for'])
+    self.field_helpers = (FormHelper.instance_methods.map(&:to_s) - ['form_for'])
     
     (field_helpers - %w(label check_box radio_button fields_for hidden_field)).each do |selector|
       src = <<-end_src
